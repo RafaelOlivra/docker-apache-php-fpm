@@ -12,4 +12,5 @@ RUN mkdir -p /certs/
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=www.example.com" -keyout /certs/privkey.pem -out /certs/fullchain.pem
 
 RUN a2enmod http2 ssl rewrite headers deflate expires brotli proxy_fcgi setenvif
+RUN memcached -u root &
 COPY ./assets/apache-vhost-config.conf /etc/apache2/sites-available/000-default.conf
