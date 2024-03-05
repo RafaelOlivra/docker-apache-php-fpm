@@ -2,5 +2,5 @@
 set -Eeuo pipefail
 
 chown -R www-data:www-data /var/www/html
-memcached -u root &
+redis-server &
 apache2-foreground
