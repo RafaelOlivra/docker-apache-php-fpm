@@ -5,7 +5,7 @@ RUN apt install -y nano memcached libmemcached-tools
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions
-RUN install-php-extensions mysqli exif gd intl imagick opcache zip pdo_mysql memcached
+RUN install-php-extensions mysqli exif gd intl imagick opcache zip pdo_mysql memcached calendar
 COPY ./assets/php.ini "$PHP_INI_DIR/php.ini"
 
 RUN mkdir -p /certs/
