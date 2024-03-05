@@ -1,0 +1,49 @@
+version: "3.1"
+services:
+    proxy:
+        image: "jc21/nginx-proxy-manager:latest"
+        restart: unless-stopped
+        ports:
+            - "80:80"
+            - "7001:81"
+            - "443:443"
+        env_file:
+            - "./.env"
+        volumes:
+            - ${DATA_DIR}/proxy/data:/data
+            - ${DATA_DIR}/proxy/letsencrypt:/etc/letsencrypt
+        networks:
+            - default
+
+    mariadb:
+        image: mariadb:latest
+        container_name: web-mariadb
+        restart: unless-stopped
+        env_file:
+            - "./.env"
+        environment:
+            MARIADB_DATABASE: "${PROD_MARIADB_DATABASE}"
+            MARIADB_USER: "${PROD_MARIADB_USER}"
+            MARIADB_PASSWORD: "${PROD_MARIADB_PASSWORD}"
+            MARIADB_ROOT_PASSWORD: "${PROD_MARIADB_ROOT_PASSWORD}"
+        volumes:
+            - ${DATA_DIR}/mysql/:/var/lib/mysql/
+        networks:
+            - default
+    
+    apache:
+        build: .
+        image: rovps/apachephpws
+        container_name: web-${DOMAIN}
+        environment:
+            - HOSTNAME=${DOMAIN}
+        restart: unless-stopped
+        env_file:
+            - "./.env"
+        volumes:
+            - ${WEB_DIR}:/var/www/html
+        networks:
+            - default
+networks:
+    default:
+        external: false
