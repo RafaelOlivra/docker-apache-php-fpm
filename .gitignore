@@ -1,3 +1,4 @@
 .env
+.run.local
 /log
 /data
