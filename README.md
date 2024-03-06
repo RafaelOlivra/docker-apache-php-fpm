@@ -17,9 +17,9 @@ Add a new proxy with the details:
 
 ```
 Domain names: your domain
-Scheme: http
+Scheme: https or http
 Forward Hostname: app
-Forward Port: 443
+Forward Port: 443 or 80
 ```
 
 You can check https://nginxproxymanager.com/guide/#quick-setup for more options.
