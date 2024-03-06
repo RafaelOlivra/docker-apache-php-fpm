@@ -1,6 +1,6 @@
 # A simple Docker Image for Containerized PHP Applications
 
-It includes by default **Nginx Proxy Manager / Mariadb Latest / phpMyAdmin / Customized php:8.2-apache with Redis **.  
+It includes by default **Nginx Proxy Manager / Mariadb Latest / phpMyAdmin / Customized php:8.2-apache **.  
 I made this because I wanted a fast and simple way to deploy a performant WordPress site.
 
 ## Usage
@@ -16,7 +16,7 @@ Add a new proxy with the details:
 Domain names: your domain
 Scheme: http
 Forward Hostname: app
-Forward Port: 80
+Forward Port: 443
 ```
 You can check https://nginxproxymanager.com/guide/#quick-setup for more options.
 
