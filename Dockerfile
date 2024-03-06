@@ -1,11 +1,12 @@
 FROM php:8.2-apache
 ARG HOSTNAME
 RUN apt-get update
-RUN apt install -y nano memcached libmemcached-tools
+RUN apt install -y nano redis-server
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions
-RUN install-php-extensions mysqli exif gd intl imagick opcache zip pdo_mysql redis calendar
+RUN install-php-extensions mysqli exif gd imagick opcache
+RUN install-php-extensions intl zip pdo_mysql redis calendar
 COPY ./assets/php.ini "$PHP_INI_DIR/php.ini"
 
 RUN mkdir -p /certs/
