@@ -1,6 +1,6 @@
 # A simple Docker Image for Containerized PHP Applications
 
-It includes by default **Nginx Proxy Manager / Mariadb Latest / phpMyAdmin / Customized php:8.2-apache **.  
+It includes by default **Nginx Proxy Manager / Mariadb Latest / phpMyAdmin / Customized php:8.2-fpm with Apache2 **.  
 I made this because I wanted a fast and simple way to deploy a performant WordPress site.
 
 ## Usage

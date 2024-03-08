@@ -2,4 +2,7 @@
 set -Eeuo pipefail
 
 chown -R www-data:www-data /var/www/html
-apache2-foreground
+php-fpm &
+service apache2 restart
+
+tail -f /dev/null
