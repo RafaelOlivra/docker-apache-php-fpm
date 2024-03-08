@@ -1,18 +1,35 @@
 version: "3.1"
 services:
-    proxy:
+    # proxy:
+    #     container_name: proxy
+    #     image: "jc21/nginx-proxy-manager:latest"
+    #     restart: unless-stopped
+    #     ports:
+    #         - "80:80"
+    #         - "7001:81"
+    #         - "443:443"
+    #     env_file:
+    #         - "./.env"
+    #     volumes:
+    #         - ${DATA_DIR}/proxy/data:/data
+    #         - ${DATA_DIR}/proxy/letsencrypt:/etc/letsencrypt
+    #     networks:
+    #         - default
+    caddy:
+        image: caddy:alpine
         container_name: proxy
-        image: "jc21/nginx-proxy-manager:latest"
         restart: unless-stopped
-        ports:
-            - "80:80"
-            - "7001:81"
-            - "443:443"
         env_file:
             - "./.env"
+        ports:
+            - 80:80
+            - 443:443
+            - 443:443/udp
         volumes:
-            - ${DATA_DIR}/proxy/data:/data
-            - ${DATA_DIR}/proxy/letsencrypt:/etc/letsencrypt
+            - ${DATA_DIR}/caddy/data:/data
+            - ${DATA_DIR}/caddy/config:/config
+            - ./assets/Caddyfile:/etc/caddy/Caddyfile
+            - ${DATA_DIR}/caddy/certificate-authority:/data/caddy/pki/authorities/local
         networks:
             - default
 
@@ -42,7 +59,7 @@ services:
             - PMA_ARBITRARY=1
         profiles:
             - donotstart
-    
+
     app:
         build: .
         image: apachephpws

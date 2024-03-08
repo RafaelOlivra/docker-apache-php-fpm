@@ -1,0 +1,9 @@
+# HTTP site block
+{$DOMAIN}:80 {
+  redir https://{host}{uri}
+}
+
+# HTTPS site block
+{$DOMAIN}:443 {
+  reverse_proxy h2c://app
+}

@@ -1,6 +1,14 @@
 # A simple Docker Image for Containerized PHP Applications
 
-It includes by default **Nginx Proxy Manager / Mariadb Latest / phpMyAdmin / Customized php:8.2-fpm with Apache2 **.  
+It includes by default:
+
+```
+Caddy
+Mariadb Latest
+phpMyAdmin (Not started by default)
+Customized php:8.2-fpm with Apache2 (Better compatibility with WordPress)
+```
+
 I made this because I wanted a fast and simple way to deploy a performant WordPress site.
 
 ## Usage
@@ -12,16 +20,4 @@ Then run:
 docker-compose up --build
 ```
 
-After everything is online go your domain:7001 and create your admin credentials (Default: admin@example.com/changeme).
-Add a new proxy with the details:
-
-```
-Domain names: your domain
-Scheme: https or http
-Forward Hostname: app
-Forward Port: 443 or 80
-```
-
-You can check https://nginxproxymanager.com/guide/#quick-setup for more options.
-
-That's it" Your site should now be accessible. I'll add more details later on how to set-up WordPress.
+That's it" Your site should now be accessible via HTTPS. I'll add more details later on how to set-up WordPress.
