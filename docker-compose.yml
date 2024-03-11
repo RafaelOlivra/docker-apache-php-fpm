@@ -50,7 +50,7 @@ services:
         image: apachephpws
         container_name: app
         environment:
-            - HOSTNAME=${DOMAIN}
+            - HOSTNAME=${HOSTNAME}
         restart: unless-stopped
         env_file:
             - "./.env"
