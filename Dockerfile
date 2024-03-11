@@ -1,5 +1,7 @@
 FROM php:8.2-fpm
-ARG HOSTNAME
+ARG HOSTNAME=localhost
+
+RUN echo "Setting up container for $HOSTNAME"
 RUN apt-get update
 RUN apt install -y nano apache2
 
@@ -15,8 +17,8 @@ RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj "/C=US/ST=Denial/L
 RUN a2dismod mpm_prefork
 RUN a2enmod http2 ssl rewrite headers deflate expires brotli proxy_fcgi setenvif mpm_event
 COPY ./assets/apache-vhost-config.conf /etc/apache2/sites-available/000-default.conf
+RUN echo "ServerName $HOSTNAME" | tee -a /etc/apache2/apache2.conf
 
-# SETUP
 COPY ./assets/docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
 RUN chmod +x /usr/bin/docker-entrypoint.sh
 

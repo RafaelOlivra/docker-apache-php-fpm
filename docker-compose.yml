@@ -46,11 +46,12 @@ services:
             - donotstart
 
     app:
-        build: .
+        build: 
+            context: .
+            args:
+                - HOSTNAME: ${HOSTNAME:localhost}
         image: apachephpws
         container_name: app
-        environment:
-            - HOSTNAME=${HOSTNAME}
         restart: unless-stopped
         env_file:
             - "./.env"
