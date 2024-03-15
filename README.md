@@ -20,4 +20,4 @@ Then run:
 docker-compose up --build
 ```
 
-That's it" Your site should now be accessible via HTTPS. I'll add more details later on how to set-up WordPress.
+That's it! Your site should now be accessible via HTTPS. I'll add more details later on how to set-up WordPress.
