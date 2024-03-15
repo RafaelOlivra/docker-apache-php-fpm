@@ -50,7 +50,7 @@ services:
             context: .
             args:
                 - HOSTNAME: "${HOSTNAME}"
-        image: rodev/apache-php8.2-fpm:latest
+        image: rafaeloliveirax/apache-php8.2-fpm:latest
         container_name: app
         restart: unless-stopped
         env_file:

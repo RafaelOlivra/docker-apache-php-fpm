@@ -2,7 +2,7 @@ FROM php:8.2-fpm
 ARG HOSTNAME=localhost
 
 RUN echo "Setting up container for $HOSTNAME" && \
-    apt-get update && apt install -y nano apache2
+    apt-get update && apt install -y --no-install-recommends nano apache2
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions
@@ -18,7 +18,7 @@ COPY ./assets/apache-vhost-config.conf /etc/apache2/sites-available/000-default.
 RUN echo "ServerName $HOSTNAME" | tee -a /etc/apache2/apache2.conf
 
 COPY ./assets/docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
-RUN chmod +x /usr/bin/docker-entrypoint.sh
+RUN chmod +x /usr/bin/docker-entrypoint.sh && rm -rf /var/lib/apt/lists/*
 
 LABEL name="apache-php8.2-fpm"
 LABEL email="dev@rafaeloliveira.design"
