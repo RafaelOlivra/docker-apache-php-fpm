@@ -21,4 +21,4 @@ jobs:
               run: docker login -u $username -p $password
 
             - name: Push image to Docker Hub
-              run: docker push rafaeloliveirax/apache-php8.2-fpm:tagname:latest
+              run: docker push rafaeloliveirax/apache-php8.2-fpm:latest
