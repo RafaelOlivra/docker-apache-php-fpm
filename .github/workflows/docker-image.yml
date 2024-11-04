@@ -1,18 +1,24 @@
 name: Docker Image CI
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    push:
+        branches: ["main"]
 
 jobs:
+    build:
+        runs-on: ubuntu-latest
 
-  build:
+        steps:
+            - uses: actions/checkout@v3
 
-    runs-on: ubuntu-latest
+            - name: Build the Docker image
+              run: docker build . --file Dockerfile --tag rafaeloliveirax/apache-php8.2-fpm:$(date +%s)
 
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag rafaeloliveirax/apache-php8.2-fpm:$(date +%s)
+            - name: Log in to Docker Hub
+              env:
+                  username: ${{secrets.DOCKERHUB_USERNAME}}
+                  password: ${{secrets.DOCKERHUB_PASSWORD}}
+              run: docker login -u $username -p $password
+
+            - name: Push image to Docker Hub
+              run: docker push ${{secrets.DOCKERHUB_USERNAME}}/apache-php8.2-fpm:$(date +%s)
