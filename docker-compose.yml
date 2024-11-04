@@ -49,7 +49,7 @@ services:
         build:
             context: .
             args:
-                - HOSTNAME: "${HOSTNAME}"
+                HOSTNAME: "${HOSTNAME}"
         image: rafaeloliveirax/apache-php8.2-fpm:latest
         container_name: app
         restart: unless-stopped
