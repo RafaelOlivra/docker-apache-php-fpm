@@ -46,10 +46,10 @@ services:
             - donotstart
 
     app:
-        build:
-            context: .
-            args:
-                HOSTNAME: "${HOSTNAME}"
+        # build:
+        #     context: .
+        #     args:
+        #         HOSTNAME: "${HOSTNAME}"
         image: rafaeloliveirax/apache-php8.2-fpm:latest
         container_name: app
         restart: unless-stopped
