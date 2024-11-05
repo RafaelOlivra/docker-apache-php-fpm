@@ -1,4 +1,5 @@
-version: "3.1"
+version: "3.8"
+
 services:
     caddy:
         image: caddy:alpine
@@ -7,14 +8,14 @@ services:
         env_file:
             - "./.env"
         ports:
-            - 80:80
-            - 443:443
-            - 443:443/udp
+            - "80:80"
+            - "443:443"
+            - "443:443/udp"
         volumes:
-            - ${DATA_DIR}/caddy/data:/data
-            - ${DATA_DIR}/caddy/config:/config
-            - ./assets/Caddyfile:/etc/caddy/Caddyfile
-            - ${DATA_DIR}/caddy/certificate-authority:/data/caddy/pki/authorities/local
+            - "${DATA_DIR}/caddy/data:/data"
+            - "${DATA_DIR}/caddy/config:/config"
+            - "./assets/Caddyfile:/etc/caddy/Caddyfile"
+            - "${DATA_DIR}/caddy/certificate-authority:/data/caddy/pki/authorities/local"
         networks:
             - default
 
@@ -30,7 +31,7 @@ services:
             MARIADB_PASSWORD: "${PROD_MARIADB_PASSWORD}"
             MARIADB_ROOT_PASSWORD: "${PROD_MARIADB_ROOT_PASSWORD}"
         volumes:
-            - ${DATA_DIR}/mysql/:/var/lib/mysql/
+            - "${DATA_DIR}/mysql:/var/lib/mysql"
         networks:
             - default
 
@@ -39,7 +40,7 @@ services:
         container_name: phpmyadmin
         restart: "no"
         ports:
-            - 7002:80
+            - "7002:80"
         environment:
             - PMA_ARBITRARY=1
         profiles:
@@ -49,16 +50,18 @@ services:
         # build:
         #     context: .
         #     args:
-        #         HOSTNAME: "${HOSTNAME}"
-        image: rafaeloliveirax/apache-php8.2-fpm:latest
+        #         HOSTNAME: ${HOSTNAME}
+        #         PHP_VERSION: ${PHP_VERSION:-8.2-fpm}
+        image: "rafaeloliveirax/apache-php${PHP_VERSION:-8.2-fpm}:latest"
         container_name: app
         restart: unless-stopped
         env_file:
             - "./.env"
         volumes:
-            - ${WEB_DIR}:/var/www/html
+            - "${WEB_DIR}:/var/www/html"
         networks:
             - default
+
 networks:
     default:
         external: false

@@ -1,5 +1,6 @@
-FROM php:8.2-fpm
 ARG HOSTNAME=localhost
+ARG PHP_VERSION=8.2-fpm
+FROM php:$PHP_VERSION
 
 RUN echo "Setting up container for $HOSTNAME" && \
     apt-get update && apt install -y --no-install-recommends nano apache2
