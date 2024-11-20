@@ -59,6 +59,7 @@ services:
             - "./.env"
         volumes:
             - "${WEB_DIR}:/var/www/html"
+            - ./log/apache2:/var/log/apache2
         networks:
             - default
 

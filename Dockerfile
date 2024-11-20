@@ -14,14 +14,13 @@ RUN mkdir -p /certs/
 RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 -subj "/C=US/ST=Denial/L=Springfield/O=Dis/CN=www.example.com" -keyout /certs/privkey.pem -out /certs/fullchain.pem
 
 RUN a2dismod mpm_prefork && \
-    a2enmod http2 ssl rewrite headers deflate expires brotli proxy_fcgi setenvif mpm_event
+    a2enmod http2 ssl rewrite headers deflate expires brotli proxy_fcgi setenvif mpm_event remoteip
 COPY ./assets/apache-vhost-config.conf /etc/apache2/sites-available/000-default.conf
-RUN echo "ServerName $HOSTNAME" | tee -a /etc/apache2/apache2.conf
 
 COPY ./assets/docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
 RUN chmod +x /usr/bin/docker-entrypoint.sh && rm -rf /var/lib/apt/lists/*
 
-LABEL name="apache-php8.2-fpm"
+LABEL name="apache-php$PHP_VERSION"
 LABEL email="dev@rafaeloliveira.design"
 
 CMD ["bash", "/usr/bin/docker-entrypoint.sh"]
