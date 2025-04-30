@@ -51,8 +51,8 @@ services:
         #     context: .
         #     args:
         #         HOSTNAME: ${HOSTNAME}
-        #         PHP_VERSION: ${PHP_VERSION:-8.2-fpm}
-        image: "rafaeloliveirax/apache-php${PHP_VERSION:-8.2-fpm}:latest"
+        #         PHP_VERSION: ${PHP_VERSION:-8.4.7RC1-fpm-alpine3.21}
+        image: "rafaeloliveirax/apache-php${PHP_VERSION:-8.4.7RC1-fpm-alpine3.21}:latest"
         container_name: app
         restart: unless-stopped
         env_file:
