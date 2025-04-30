@@ -6,7 +6,7 @@ It includes by default:
 Caddy
 Mariadb Latest
 phpMyAdmin (Not started by default)
-Customized php:8.4.7RC1-fpm-alpine3.21 with Apache2 (Better compatibility with WordPress)
+Customized php:8.4-fpm with Apache2 (Better compatibility with WordPress)
 ```
 
 I made this because I wanted a fast and simple way to deploy a performant WordPress site.
