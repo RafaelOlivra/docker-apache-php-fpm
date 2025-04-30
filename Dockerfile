@@ -2,9 +2,7 @@ ARG HOSTNAME=localhost
 ARG PHP_VERSION=8.4.7RC1-fpm-alpine3.21
 FROM php:$PHP_VERSION
 
-RUN echo "Using PHP version $PHP_VERSION" && \
-    echo "Setting up container for $HOSTNAME" &&
-
+RUN echo "Using PHP version $PHP_VERSION"
 RUN echo "Setting up container for $HOSTNAME" && \
     apt update && apt install -y --no-install-recommends nano apache2
 
