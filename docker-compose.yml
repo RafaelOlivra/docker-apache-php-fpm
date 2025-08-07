@@ -62,12 +62,11 @@ services:
         image: busybox
         container_name: admin_tools
         volumes:
-            - admin_tools_shared:/tools/
-            - "./assets/tinyfilemanager.php:/tools/filebrowser/index.php"
-            - "./assets/adminer.php:/tools/dbadmin/index.php"
+            - ./assets/tools:/tools
+            - admin_tools_shared:/tools
+        command: sh -c "echo 'Files have been copied to the volume'; tail -f /dev/null"
         profiles:
             - admin
-        command: ["sh", "-c", "while true; do sleep 3600; done"]
 
 
 networks:
