@@ -59,11 +59,13 @@ services:
     # -- Management Utils
 
     filebrowser:
-        image: coderaiser/cloudcmd
+        image: tinyfilemanager/tinyfilemanager
         container_name: filebrowser
         volumes:
             - "${WEB_DIR}:/root/fs"
         restart: unless-stopped
+        environment:
+            - "${WEB_DIR}:/var/www/html/data"
         profiles:
             - ${ADMIN_TOOLS_PROFILE:-donotstart}
         networks:
