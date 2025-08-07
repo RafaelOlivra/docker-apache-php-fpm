@@ -90,4 +90,4 @@ networks:
         external: false
         
 volumes:
-  filebrowser:
+    filebrowser:
