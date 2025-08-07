@@ -13,6 +13,8 @@ services:
             - "80:80"
             - "443:443"
             - "443:443/udp"
+            - "7080:7080" # Adminer
+            - "7081:7081" # File Browser
         volumes:
             - "${DATA_DIR}/caddy/data:/data"
             - "${DATA_DIR}/caddy/config:/config"
@@ -60,6 +62,7 @@ services:
 
     dbadmin:
         image: adminer
+        container_name: dbadmin
         restart: unless-stopped
         profiles:
             - admin
@@ -76,6 +79,3 @@ services:
 networks:
     default:
         external: false
-
-volumes:
-    admin_tools_shared: 

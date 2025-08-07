@@ -7,18 +7,20 @@ It includes by default:
 -   🔐 [Caddy](https://caddyserver.com/) – Handles HTTPS automatically
 -   🐬 [MariaDB](https://mariadb.org/) – Latest version for robust MySQL support
 -   🐘 Apache2 with PHP `8.4-fpm` – Custom image optimized for WordPress
--   📂 [Tiny File Manager](https://github.com/prasathmani/tinyfilemanager) – File manager UI (optional)
--   🛠️ [Adminer](https://www.Adminer.net/) – Web-based DB access (optional)
+-   🛠️ [Adminer](https://www.adminer.org/en/) – Web-based DB access (optional)
+-   📂 [FileGator](https://github.com/filegator/filegator) – File manager UI (optional)
 
 ---
 
 ## 📦 Services Overview
 
-| Service | Description                                 | Port(s)       |
-| ------- | ------------------------------------------- | ------------- |
-| `proxy` | Caddy reverse proxy (HTTPS & static assets) | 80, 443       |
-| `db`    | MariaDB database                            | Internal only |
-| `app`   | Apache2 with PHP 8.4 (custom image)         | Internal only |
+| Service       | Description                                 | Port(s)             |
+| ------------- | ------------------------------------------- | ------------------- |
+| `proxy`       | Caddy reverse proxy (HTTPS & static assets) | 80, 443, 7080, 7081 |
+| `db`          | MariaDB database                            | Internal only       |
+| `app`         | Apache2 with PHP 8.4 (custom image)         | Internal only       |
+| `dbadmin`     | Adminer                                     | Internal only       |
+| `filemanager` | FileGator                                   | Internal only       |
 
 ---
 
@@ -49,7 +51,7 @@ It includes by default:
     docker-compose --profile admin up -d
     ```
 
-> ℹ️ The admin tools include Tiny File Manager and Adminer. These are disabled by default using Docker Compose [profiles](https://docs.docker.com/compose/profiles/).
+> ℹ️ The admin tools include Adminer and FileGator. These are disabled by default using Docker Compose [profiles](https://docs.docker.com/compose/profiles/).
 
 ---
 
@@ -67,9 +69,8 @@ CADDY_CONFIG_EXTRA=tls internal
 
 -   Use docker-compose logs -f to monitor logs.
 -   You can mount additional volumes for plugins/themes inside html/.
--   (Optional) Adminer available at: https://yourdomain.com/.adm/dbadmin/
--   (Optional) Tiny File Manager available at: https://yourdomain.com/.adm/filemanager/
--   The admin tools are mounted as a shared volume, and are only accessible through the app container. The admin_tools sole purpose is to populate the shared volume with the necessary files.
+-   (Optional) Adminer available at: https://yourdomain.com:7080 (Behind HTTP Authentication)
+-   (Optional) FileGator available at: https://yourdomain.com:7081 (Behind HTTP Authentication. After authentication, please use 'admin' and 'admin123' in the FileGator login form)
 
 ---
 

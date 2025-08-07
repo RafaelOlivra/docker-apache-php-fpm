@@ -7,19 +7,21 @@
 }
 
 # Adminer (Database management)
-{$DOMAIN}:7080 {
+{$HOSTNAME}:7080 {
+  {$CADDY_CONFIG_EXTRA}
 
-  basicauth {
+  basic_auth {
       {$PROD_MANAGEMENT_USER} {$PROD_MANAGEMENT_PASSWORD_HASH}
   }
-
-  reverse_proxy h2c://adminer:8080
+  reverse_proxy http://dbadmin:8080
 }
 
 # File Browser
-{$DOMAIN}:7081 {
-  basicauth {
+{$HOSTNAME}:7081 {
+  {$CADDY_CONFIG_EXTRA}
+  
+  basic_auth {
       {$PROD_MANAGEMENT_USER} {$PROD_MANAGEMENT_PASSWORD_HASH}
   }
-  reverse_proxy h2c://filebrowser:8080
+  reverse_proxy http://filemanager:8080
 }
