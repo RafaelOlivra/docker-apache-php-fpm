@@ -62,9 +62,9 @@ services:
         image: busybox
         container_name: admin_tools
         volumes:
-            - ./assets/tools:/tools
+            - ./assets/tools:/tmp/tools
             - admin_tools_shared:/tools
-        command: sh -c "echo 'Files have been copied to the volume'; tail -f /dev/null"
+        command: sh -c "cp -r /tmp/tools/* /tools/; echo 'Files have been copied to the volume'; tail -f /dev/null"
         profiles:
             - admin
 
