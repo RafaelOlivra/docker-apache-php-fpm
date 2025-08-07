@@ -4,11 +4,4 @@
 
   # Main reverse proxy
   reverse_proxy h2c://app
-
-  # Protect admin tools
-  handle_path /.adm/* {
-    basicauth {
-      {$PROD_MANAGEMENT_USER} {$PROD_MANAGEMENT_PASSWORD_HASH}
-    }
-  }
 }
