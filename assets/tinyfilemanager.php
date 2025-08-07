@@ -26,8 +26,7 @@
     // Users: array('Username' => 'Password', 'Username2' => 'Password2', ...)
     // Generate secure password hash - https://tinyfilemanager.github.io/docs/pwd.html
     $auth_users = [
-        'admin' => password_hash($_SERVER['PROD_MANAGEMENT_USER'], PASSWORD_DEFAULT),
-        'user'  => password_hash($_SERVER['PROD_MANAGEMENT_PASSWORD'], PASSWORD_DEFAULT),
+        $_SERVER['PROD_MANAGEMENT_USER'] => password_hash($_SERVER['PROD_MANAGEMENT_PASSWORD'], PASSWORD_DEFAULT),
     ];
 
     // Readonly users
