@@ -52,16 +52,25 @@ services:
             - "./.env"
         volumes:
             - "${WEB_DIR}:/var/www/html"
-            - "./assets/tinyfilemanager.php:/var/www/html/.adm/filebrowser/index.php"
-            - "./assets/adminer.php:/var/www/html/.adm/dbadmin/index.php"
             - "${DATA_DIR}/logs/apache2:/var/log/apache2"
+            - admin_tools_shared:/var/www/html/.adm/
         networks:
             - default
 
-# -- Management Utils
-
+    # -- Admin Management Tools
+    admin_tools:
+        image: busybox
+        volumes:
+            - admin_tools_shared:/tools/
+            - "./assets/tinyfilemanager.php:/tools/filebrowser/index.php"
+            - "./assets/adminer.php:/tools/dbadmin/index.php"
+        profiles:
+            - admin
 
 
 networks:
     default:
         external: false
+
+volumes:
+    admin_tools_shared: 
