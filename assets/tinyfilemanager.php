@@ -1,4 +1,10 @@
 <?php
+
+    // If ADMIN_TOOLS_PROFILE is not 'admin', bail out
+    if (! isset($_SERVER['ADMIN_TOOLS_PROFILE']) || $_SERVER['ADMIN_TOOLS_PROFILE'] != 'admin') {
+        exit('Access denied');
+    }
+
     //Default Configuration
     $CONFIG = '{"lang":"en","error_reporting":false,"show_hidden":false,"hide_Cols":false,"theme":"light"}';
 
