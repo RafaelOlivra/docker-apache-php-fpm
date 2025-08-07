@@ -67,19 +67,18 @@ services:
         volumes:
             - "${WEB_DIR}:/srv"
             - "${DATA_DIR}/filebrowser:/database"
-        environment:
-            - FB_USER=${PROD_MANAGEMENT_USER}
-            - FB_PASSWORD=${PROD_MANAGEMENT_PASSWORD}
+        env_file:
+            - "./.env"
         command: >
             sh -c "
                 if [ ! -f /database/filebrowser.db ]; then
                 echo '[INFO] Initializing File Browser database...';
                 filebrowser config init --database /database/filebrowser.db;
-                filebrowser users add ${FB_USER} ${FB_PASSWORD} --perm.admin --database /database/filebrowser.db;
+                filebrowser users add ${PROD_MANAGEMENT_USER} ${PROD_MANAGEMENT_PASSWORD} --perm.admin --database /database/filebrowser.db;
                 fi;
                 filebrowser --database /database/filebrowser.db"
         profiles:
-            - ${ADMIN_TOOLS_PROFILE:donotstart}
+            - ${ADMIN_TOOLS_PROFILE:-donotstart}
         networks:
             - default
 
@@ -92,7 +91,7 @@ services:
         environment:
             - PMA_ARBITRARY=1
         profiles:
-            - ${ADMIN_TOOLS_PROFILE:donotstart}
+            - ${ADMIN_TOOLS_PROFILE:-donotstart}
         networks:
             - default
 
