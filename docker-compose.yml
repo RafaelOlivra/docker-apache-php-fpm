@@ -59,16 +59,16 @@ services:
     # -- Management Utils
 
     filebrowser:
-        image: tinyfilemanager/tinyfilemanager
+        image: filebrowser/filebrowser:latest
         container_name: filebrowser
-        volumes:
-            - "${WEB_DIR}:/root/fs"
         restart: unless-stopped
+        volumes:
+            - "${WEB_DIR}:/srv"
+            - "${DATA_DIR}/filebrowser:/database"
         env_file:
             - "./.env"
         environment:
-            - "${WEB_DIR}:/var/www/html/.filebrowser/"
-            - ./assets/filebrowser-config.php:/var/www/html/.filebrowser/config.php
+            - FB_BASEURL=/adm/filebrowser/
         profiles:
             - ${ADMIN_TOOLS_PROFILE:-donotstart}
         networks:
