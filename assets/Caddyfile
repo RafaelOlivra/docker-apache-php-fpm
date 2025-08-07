@@ -5,13 +5,16 @@
 
   # File Browser at /adm/filebrowser
   handle_path /adm/filebrowser/* {
+    basicauth {
+      {$PROD_MANAGEMENT_USER} {$PROD_MANAGEMENT_PASSWORD_HASH}
+    }
     reverse_proxy filebrowser:80
   }
 
   # phpMyAdmin at /adm/dbadmin, protected by Basic Auth
   handle_path /adm/dbadmin/* {
     basicauth {
-      {$PROD_MANAGEMENT_USER} {$PHPMA_PASSWORD_HASH}
+      {$PROD_MANAGEMENT_USER} {$PROD_MANAGEMENT_PASSWORD_HASH}
     }
     reverse_proxy phpmyadmin:80
   }

@@ -72,7 +72,7 @@ services:
                 if [ ! -f /database/filebrowser.db ]; then
                 echo '[INFO] Initializing File Browser database...';
                 filebrowser config init --database /database/filebrowser.db;
-                filebrowser users add ${PROD_MANAGEMENT_USER} ${PROD_MANAGEMENT_PASSWORD} --perm.admin --database /database/filebrowser.db;
+                filebrowser users add ${PROD_MANAGEMENT_USER} ${PROD_MANAGEMENT_PASSWORD_HASH} --perm.admin --database /database/filebrowser.db;
                 fi;
                 filebrowser --database /database/filebrowser.db"
         profiles:
