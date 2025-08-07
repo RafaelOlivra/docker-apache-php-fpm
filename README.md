@@ -7,20 +7,18 @@ It includes by default:
 -   🔐 [Caddy](https://caddyserver.com/) – Handles HTTPS automatically
 -   🐬 [MariaDB](https://mariadb.org/) – Latest version for robust MySQL support
 -   🐘 Apache2 with PHP `8.4-fpm` – Custom image optimized for WordPress
--   📂 [Filebrowser](https://filebrowser.org/) – File manager UI (optional)
--   🛠️ [phpMyAdmin](https://www.phpmyadmin.net/) – Web-based DB access (optional)
+-   📂 [Tiny File Manager](https://github.com/prasathmani/tinyfilemanager) – File manager UI (optional)
+-   🛠️ [Adminer](https://www.Adminer.net/) – Web-based DB access (optional)
 
 ---
 
 ## 📦 Services Overview
 
-| Service       | Description                                 | Port(s)       |
-| ------------- | ------------------------------------------- | ------------- |
-| `proxy`       | Caddy reverse proxy (HTTPS & static assets) | 80, 443       |
-| `db`          | MariaDB database                            | Internal only |
-| `app`         | Apache2 with PHP 8.4 (custom image)         | Internal only |
-| `filebrowser` | Optional file manager UI                    | Internal only |
-| `dbadmin`     | Optional phpMyAdmin interface               | Internal only |
+| Service | Description                                 | Port(s)       |
+| ------- | ------------------------------------------- | ------------- |
+| `proxy` | Caddy reverse proxy (HTTPS & static assets) | 80, 443       |
+| `db`    | MariaDB database                            | Internal only |
+| `app`   | Apache2 with PHP 8.4 (custom image)         | Internal only |
 
 ---
 
@@ -51,7 +49,7 @@ It includes by default:
     docker-compose --profile admin up -d
     ```
 
-> ℹ️ The admin tools include Filebrowser and phpMyAdmin. These are disabled by default using Docker Compose [profiles](https://docs.docker.com/compose/profiles/).
+> ℹ️ The admin tools include Tiny File Manager and Adminer. These are disabled by default using Docker Compose [profiles](https://docs.docker.com/compose/profiles/).
 
 ---
 
@@ -67,10 +65,11 @@ CADDY_CONFIG_EXTRA=tls internal
 
 ## 🧩 Tips
 
--   Use `docker-compose logs -f` to monitor logs.
--   You can mount additional volumes for plugins/themes inside `html/`.
--   If using phpMyAdmin, access it at: `https://yourdomain.com/adm/dbadmin/`
--   Filebrowser available at: `https://yourdomain.com/adm/filebrowser/`
+-   Use docker-compose logs -f to monitor logs.
+-   You can mount additional volumes for plugins/themes inside html/.
+-   (Optional) Adminer available at: https://yourdomain.com/.adm/dbadmin/
+-   (Optional) Tiny File Manager available at: https://yourdomain.com/.adm/filebrowser/
+-   The admin tools are mounted as a shared volume, and are only accessible through the app container. The admin_tools sole purpose is to populate the shared volume with the necessary files.
 
 ---
 
