@@ -1,5 +1,7 @@
 # Default site (your main app)
 {$DOMAIN} {
+  {$CADDY_CONFIG_EXTRA}
+
   # Main reverse proxy
   reverse_proxy h2c://app
 
