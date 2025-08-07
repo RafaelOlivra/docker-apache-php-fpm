@@ -52,29 +52,12 @@ services:
             - "./.env"
         volumes:
             - "${WEB_DIR}:/var/www/html"
+            - "./assets/tinyfilemanager.php:/var/www/html/adm/filebrowser/index.php"
             - "${DATA_DIR}/logs/apache2:/var/log/apache2"
         networks:
             - default
 
     # -- Management Utils
-
-    filebrowser:
-        image: filebrowser/filebrowser:latest
-        container_name: filebrowser
-        restart: unless-stopped
-        user: "root:root"
-        volumes:
-            - "${WEB_DIR}:/srv"
-            - "filebrowser_cfg:/config"
-            - "filebrowser_db:/database"
-        env_file:
-            - "./.env"
-        environment:
-            - FB_BASEURL=/adm/filebrowser/
-        profiles:
-            - ${ADMIN_TOOLS_PROFILE:-donotstart}
-        networks:
-            - default
 
     dbadmin:
         image: phpmyadmin:latest
