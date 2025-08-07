@@ -62,9 +62,11 @@ services:
         image: filebrowser/filebrowser:latest
         container_name: filebrowser
         restart: unless-stopped
+        user: "root:root"
         volumes:
             - "${WEB_DIR}:/srv"
-            - "filebrowser:/database"
+            - "filebrowser_cfg:/config"
+            - "filebrowser_db:/database"
         env_file:
             - "./.env"
         environment:
@@ -90,4 +92,5 @@ networks:
         external: false
         
 volumes:
-    filebrowser:
+    filebrowser_cfg:
+    filebrowser_db:
