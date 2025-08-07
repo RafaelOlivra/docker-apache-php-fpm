@@ -3,7 +3,7 @@ version: "3.8"
 services:
 
     # -- Main Services
-    caddy:
+    proxy:
         image: caddy:alpine
         container_name: proxy
         restart: unless-stopped
@@ -59,30 +59,19 @@ services:
     # -- Management Utils
 
     filebrowser:
-        image: filebrowser/filebrowser:latest
+        image: coderaiser/cloudcmd
         container_name: filebrowser
-        restart: unless-stopped
         volumes:
-            - "${WEB_DIR}:/srv"
-            - "${DATA_DIR}/filebrowser:/database"
-        env_file:
-            - "./.env"
-        command: >
-            sh -c "
-                if [ ! -f /database/filebrowser.db ]; then
-                echo '[INFO] Initializing File Browser database...';
-                filebrowser config init --database /database/filebrowser.db;
-                filebrowser users add ${PROD_MANAGEMENT_USER} ${PROD_MANAGEMENT_PASSWORD} --perm.admin --database /database/filebrowser.db;
-                fi;
-                filebrowser --database /database/filebrowser.db"
+            - "${WEB_DIR}:/root/fs"
+        restart: unless-stopped
         profiles:
             - ${ADMIN_TOOLS_PROFILE:-donotstart}
         networks:
             - default
 
-    phpmyadmin:
+    dbadmin:
         image: phpmyadmin:latest
-        container_name: phpmyadmin
+        container_name: dbadmin
         restart: "no"
         environment:
             - PMA_ARBITRARY=1
