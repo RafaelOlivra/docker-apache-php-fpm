@@ -68,7 +68,7 @@ CADDY_CONFIG_EXTRA=tls internal
 -   Use docker-compose logs -f to monitor logs.
 -   You can mount additional volumes for plugins/themes inside html/.
 -   (Optional) Adminer available at: https://yourdomain.com/.adm/dbadmin/
--   (Optional) Tiny File Manager available at: https://yourdomain.com/.adm/filebrowser/
+-   (Optional) Tiny File Manager available at: https://yourdomain.com/.adm/filemanager/
 -   The admin tools are mounted as a shared volume, and are only accessible through the app container. The admin_tools sole purpose is to populate the shared volume with the necessary files.
 
 ---

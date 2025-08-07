@@ -53,22 +53,25 @@ services:
         volumes:
             - "${WEB_DIR}:/var/www/html"
             - "${DATA_DIR}/logs/apache2:/var/log/apache2"
-            - admin_tools_shared:/var/www/html/.adm/
         networks:
             - default
 
-    # -- Admin Management Tools
-    
-    admin_tools:
-        image: busybox
-        container_name: admin_tools
-        volumes:
-            - ./assets/tools:/tmp/tools
-            - admin_tools_shared:/tools
-        command: sh -c "cp -r /tmp/tools/* /tools/; chown -R www-data:www-data /tools/; tail -f /dev/null"
+    # -- Management Tools
+
+    dbadmin:
+        image: adminer
+        restart: unless-stopped
         profiles:
             - admin
 
+    filemanager:
+        image: filegator/filegator
+        container_name: filemanager
+        restart: unless-stopped
+        volumes:
+            - "${WEB_DIR}:/var/www/filegator/repository"
+        profiles:
+            - admin
 
 networks:
     default:
