@@ -1,3 +1,18 @@
+# Default site (your main app)
 {$DOMAIN} {
+  # Main reverse proxy
   reverse_proxy h2c://app
+
+  # File Browser at /adm/filebrowser
+  handle_path /adm/filebrowser/* {
+    reverse_proxy filebrowser:80
+  }
+
+  # phpMyAdmin at /adm/dbadmin, protected by Basic Auth
+  handle_path /adm/dbadmin/* {
+    basicauth {
+      {$PROD_MANAGEMENT_USER} {$PHPMA_PASSWORD_HASH}
+    }
+    reverse_proxy phpmyadmin:80
+  }
 }

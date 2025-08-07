@@ -1,6 +1,8 @@
 version: "3.8"
 
 services:
+
+    # -- Main Services
     caddy:
         image: caddy:alpine
         container_name: proxy
@@ -35,18 +37,9 @@ services:
         networks:
             - default
 
-    phpmyadmin:
-        image: phpmyadmin:latest
-        container_name: phpmyadmin
-        restart: "no"
-        ports:
-            - "7002:80"
-        environment:
-            - PMA_ARBITRARY=1
-        profiles:
-            - donotstart
-
     app:
+        # Uncomment the following lines to build the image from a Dockerfile
+        # instead of pulling from a registry.
         # build:
         #     context: .
         #     args:
@@ -59,7 +52,47 @@ services:
             - "./.env"
         volumes:
             - "${WEB_DIR}:/var/www/html"
-            - ./log/apache2:/var/log/apache2
+            - "${DATA_DIR}/logs/apache2:/var/log/apache2"
+        networks:
+            - default
+
+    # -- Management Utils
+
+    filebrowser:
+        image: filebrowser/filebrowser:latest
+        container_name: filebrowser
+        restart: unless-stopped
+        ports:
+            - "8080:80"
+        volumes:
+            - "${WEB_DIR}:/srv"
+            - "${DATA_DIR}/filebrowser:/database"
+        environment:
+            - FB_USER=${PROD_MANAGEMENT_USER}
+            - FB_PASSWORD=${PROD_MANAGEMENT_PASSWORD}
+        command: >
+            sh -c "
+                if [ ! -f /database/filebrowser.db ]; then
+                echo '[INFO] Initializing File Browser database...';
+                filebrowser config init --database /database/filebrowser.db;
+                filebrowser users add ${FB_USER} ${FB_PASSWORD} --perm.admin --database /database/filebrowser.db;
+                fi;
+                filebrowser --database /database/filebrowser.db"
+        profiles:
+            - ${ADMIN_TOOLS_PROFILE:donotstart}
+        networks:
+            - default
+
+    phpmyadmin:
+        image: phpmyadmin:latest
+        container_name: phpmyadmin
+        restart: "no"
+        ports:
+            - "7002:80"
+        environment:
+            - PMA_ARBITRARY=1
+        profiles:
+            - ${ADMIN_TOOLS_PROFILE:donotstart}
         networks:
             - default
 
