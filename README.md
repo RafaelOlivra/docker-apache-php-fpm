@@ -61,6 +61,7 @@ Caddy automatically provisions HTTPS using Let's Encrypt or internal TLS if conf
 
 ```env
 CADDY_CONFIG_EXTRA=tls internal
+CADDY_CONFIG_EXTRA_TOOLS=tls internal
 ```
 
 ---
