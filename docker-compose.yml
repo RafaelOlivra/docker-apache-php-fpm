@@ -64,7 +64,7 @@ services:
         volumes:
             - ./assets/tools:/tmp/tools
             - admin_tools_shared:/tools
-        command: sh -c "cp -r /tmp/tools/* /tools/; chown -R www-data:www-data /tools/; echo 'Files have been copied to the volume'; tail -f /dev/null"
+        command: sh -c "cp -r /tmp/tools/* /tools/; chown -R www-data:www-data /tools/; tail -f /dev/null"
         profiles:
             - admin
 
