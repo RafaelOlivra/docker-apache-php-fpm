@@ -64,7 +64,7 @@ services:
         restart: unless-stopped
         volumes:
             - "${WEB_DIR}:/srv"
-            - "${DATA_DIR}/filebrowser:/database"
+            - "filebrowser:/database"
         env_file:
             - "./.env"
         environment:
