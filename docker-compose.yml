@@ -52,33 +52,16 @@ services:
             - "./.env"
         volumes:
             - "${WEB_DIR}:/var/www/html"
-            - "./assets/tinyfilemanager.php:/var/www/html/adm/filebrowser/index.php"
+            - "./assets/adminer.php:/var/www/html/.adm/filebrowser/index.php"
+            - "./assets/tinyfilemanager.php:/var/www/html/.adm/dbadmin/index.php"
             - "${DATA_DIR}/logs/apache2:/var/log/apache2"
         networks:
             - default
 
-    # -- Management Utils
+# -- Management Utils
 
-    dbadmin:
-        image: phpmyadmin:latest
-        container_name: dbadmin
-        restart: "no"
-        environment:
-            - PMA_ARBITRARY=1
-            - PMA_HOST=db
-            - PMA_PORT=3306
-            - PMA_USER=${PROD_MARIADB_USER}
-            - PMA_PASSWORD=${PROD_MARIADB_PASSWORD}
-            - PMA_ABSOLUTE_URI=https://${HOSTNAME}/adm/dbadmin/
-        profiles:
-            - ${ADMIN_TOOLS_PROFILE:-donotstart}
-        networks:
-            - default
+
 
 networks:
     default:
         external: false
-        
-volumes:
-    filebrowser_cfg:
-    filebrowser_db:
