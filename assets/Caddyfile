@@ -18,6 +18,6 @@
     basicauth {
       {$PROD_MANAGEMENT_USER} {$PROD_MANAGEMENT_PASSWORD_HASH}
     }
-    reverse_proxy phpmyadmin:80
+    reverse_proxy dbadmin:80
   }
 }

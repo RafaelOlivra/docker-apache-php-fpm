@@ -64,8 +64,11 @@ services:
         volumes:
             - "${WEB_DIR}:/root/fs"
         restart: unless-stopped
+        env_file:
+            - "./.env"
         environment:
-            - "${WEB_DIR}:/var/www/html/data"
+            - "${WEB_DIR}:/var/www/html/.filebrowser/"
+            - ./assets/filebrowser-config.php:/var/www/html/.filebrowser/config.php
         profiles:
             - ${ADMIN_TOOLS_PROFILE:-donotstart}
         networks:
