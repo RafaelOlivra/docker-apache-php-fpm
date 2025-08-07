@@ -88,3 +88,6 @@ services:
 networks:
     default:
         external: false
+        
+volumes:
+  filebrowser:
