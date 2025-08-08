@@ -20,8 +20,8 @@ services:
             - "${DATA_DIR}/caddy/config:/config"
             - "./assets/Caddyfile:/etc/caddy/Caddyfile"
             - "${DATA_DIR}/caddy/certificate-authority:/data/caddy/pki/authorities/local"
-            - ./caddy-entrypoint.sh:/usr/local/bin/caddy-entrypoint.sh
-        entrypoint: ["/usr/local/bin/caddy-entrypoint.sh"]
+            - "./assets/caddy-entrypoint.sh:/usr/local/bin/caddy-entrypoint.sh"
+        entrypoint: ["sh", "/usr/local/bin/caddy-entrypoint.sh"]
         command: ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
         networks:
             - default
