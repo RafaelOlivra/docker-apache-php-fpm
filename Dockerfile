@@ -19,10 +19,10 @@ RUN a2dismod mpm_prefork && \
     a2enmod http2 ssl rewrite headers deflate expires brotli proxy_fcgi setenvif mpm_event remoteip
 COPY ./assets/apache-vhost-config.conf /etc/apache2/sites-available/000-default.conf
 
-COPY ./assets/docker-entrypoint.sh /usr/bin/docker-entrypoint.sh
-RUN chmod +x /usr/bin/docker-entrypoint.sh && rm -rf /var/lib/apt/lists/*
+COPY ./assets/apache-entrypoint.sh /usr/bin/apache-entrypoint.sh
+RUN chmod +x /usr/bin/apache-entrypoint.sh && rm -rf /var/lib/apt/lists/*
 
 LABEL name="apache-php$PHP_VERSION"
 LABEL email="dev@rafaeloliveira.design"
 
-CMD ["bash", "/usr/bin/docker-entrypoint.sh"]
+CMD ["bash", "/usr/bin/apache-entrypoint.sh"]
