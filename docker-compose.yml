@@ -65,11 +65,11 @@ services:
             - admin
 
     filemanager:
-        image: filegator/filegator
+        image: tinyfilemanager/tinyfilemanager:master
         container_name: filemanager
-        restart: unless-stopped
         volumes:
-            - "${WEB_DIR}:/var/www/filegator/repository"
+            - "${WEB_DIR}:/var/www/html/data"
+            - "./assets/filemanager-config.php:/var/www/html/config.php"
         profiles:
             - admin
 

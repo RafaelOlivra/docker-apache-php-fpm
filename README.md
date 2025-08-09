@@ -8,7 +8,7 @@ It includes by default:
 -   🐬 [MariaDB](https://mariadb.org/) – Latest version for robust MySQL support
 -   🐘 Apache2 with PHP `8.4-fpm` – Custom image optimized for WordPress
 -   🛠️ [Adminer](https://www.adminer.org/en/) – Web-based DB access (optional)
--   📂 [FileGator](https://github.com/filegator/filegator) – File manager UI (optional)
+-   📂 [TinyFileManager](https://github.com/prasathmani/tinyfilemanager) – File manager UI (optional)
 
 ---
 
@@ -20,7 +20,7 @@ It includes by default:
 | `db`          | MariaDB database                            | Internal only       |
 | `app`         | Apache2 with PHP 8.4 (custom image)         | Internal only       |
 | `dbadmin`     | Adminer                                     | Internal only       |
-| `filemanager` | FileGator                                   | Internal only       |
+| `filemanager` | TinyFileManager                             | Internal only       |
 
 > ℹ️ We use these ports because they are supported by Cloudflare (https://developers.cloudflare.com/fundamentals/reference/network-ports/).
 
@@ -53,7 +53,7 @@ It includes by default:
     docker-compose --profile admin up -d
     ```
 
-> ℹ️ The admin tools include Adminer and FileGator. These are disabled by default using Docker Compose [profiles](https://docs.docker.com/compose/profiles/).
+> ℹ️ The admin tools include Adminer and TinyFileManager. These are disabled by default using Docker Compose [profiles](https://docs.docker.com/compose/profiles/).
 
 ---
 
@@ -73,7 +73,7 @@ CADDY_CONFIG_EXTRA_TOOLS=tls internal
 -   Use docker-compose logs -f to monitor logs.
 -   You can mount additional volumes for plugins/themes inside html/.
 -   (Optional) Adminer available at: https://yourdomain.com:2053 (Behind HTTP Authentication)
--   (Optional) FileGator available at: https://yourdomain.com:2087 (Behind HTTP Authentication. After authentication, please use 'admin' and 'admin123' in the FileGator login form)
+-   (Optional) TinyFileManager available at: https://yourdomain.com:2087 (Behind HTTP Authentication. After authentication, please use 'admin' and 'admin@123' in the TinyFileManager login form)
 
 ---
 

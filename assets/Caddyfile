@@ -23,5 +23,5 @@
   basic_auth {
       {$MANAGEMENT_USER} {$MANAGEMENT_PASSWORD_HASH}
   }
-  reverse_proxy http://filemanager:8080
+  reverse_proxy http://filemanager:80
 }
