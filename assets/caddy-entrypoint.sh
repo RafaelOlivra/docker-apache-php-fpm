@@ -6,4 +6,4 @@ if [ -n "$MANAGEMENT_PASSWORD" ]; then
     echo "Generated MANAGEMENT_PASSWORD_HASH"
 fi
 
-exec "$@"
+caddy run --config /etc/caddy/Caddyfile --adapter caddyfile

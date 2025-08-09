@@ -21,8 +21,7 @@ services:
             - "./assets/Caddyfile:/etc/caddy/Caddyfile"
             - "${DATA_DIR}/caddy/certificate-authority:/data/caddy/pki/authorities/local"
             - "./assets/caddy-entrypoint.sh:/usr/local/bin/caddy-entrypoint.sh"
-        entrypoint: ["chmod", "+x", "/usr/local/bin/caddy-entrypoint.sh", "&&", "/usr/local/bin/caddy-entrypoint.sh"]
-        command: ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+        entrypoint: [sh, "-c", "chmod +x /usr/local/bin/caddy-entrypoint.sh && /usr/local/bin/caddy-entrypoint.sh"]
         networks:
             - default
 
