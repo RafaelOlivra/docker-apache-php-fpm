@@ -16,11 +16,13 @@ It includes by default:
 
 | Service       | Description                                 | Port(s)             |
 | ------------- | ------------------------------------------- | ------------------- |
-| `proxy`       | Caddy reverse proxy (HTTPS & static assets) | 80, 443, 2052, 2053 |
+| `proxy`       | Caddy reverse proxy (HTTPS & static assets) | 80, 443, 2053, 2087 |
 | `db`          | MariaDB database                            | Internal only       |
 | `app`         | Apache2 with PHP 8.4 (custom image)         | Internal only       |
 | `dbadmin`     | Adminer                                     | Internal only       |
 | `filemanager` | FileGator                                   | Internal only       |
+
+> ℹ️ We use these ports because they are supported by Cloudflare (https://developers.cloudflare.com/fundamentals/reference/network-ports/).
 
 ---
 
@@ -70,8 +72,8 @@ CADDY_CONFIG_EXTRA_TOOLS=tls internal
 
 -   Use docker-compose logs -f to monitor logs.
 -   You can mount additional volumes for plugins/themes inside html/.
--   (Optional) Adminer available at: https://yourdomain.com:2052 (Behind HTTP Authentication)
--   (Optional) FileGator available at: https://yourdomain.com:2053 (Behind HTTP Authentication. After authentication, please use 'admin' and 'admin123' in the FileGator login form)
+-   (Optional) Adminer available at: https://yourdomain.com:2053 (Behind HTTP Authentication)
+-   (Optional) FileGator available at: https://yourdomain.com:2087 (Behind HTTP Authentication. After authentication, please use 'admin' and 'admin123' in the FileGator login form)
 
 ---
 
