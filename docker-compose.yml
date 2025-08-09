@@ -13,8 +13,8 @@ services:
             - "80:80"
             - "443:443"
             - "443:443/udp"
-            - "7080:7080" # Adminer
-            - "7081:7081" # File Browser
+            - "2052:2052" # Adminer
+            - "2053:2053" # File Browser
         volumes:
             - "${DATA_DIR}/caddy/data:/data"
             - "${DATA_DIR}/caddy/config:/config"

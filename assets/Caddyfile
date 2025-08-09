@@ -7,7 +7,7 @@
 }
 
 # Adminer (Database management)
-{$HOSTNAME}:7080 {
+{$HOSTNAME}:2052 {
   {$CADDY_CONFIG_EXTRA_TOOLS}
 
   basic_auth {
@@ -17,7 +17,7 @@
 }
 
 # File Browser
-{$HOSTNAME}:7081 {
+{$HOSTNAME}:2053 {
   {$CADDY_CONFIG_EXTRA_TOOLS}
 
   basic_auth {
