@@ -1,5 +1,5 @@
 ARG HOSTNAME=localhost
-ARG PHP_VERSION=8.4-fpm
+ARG PHP_VERSION=8.5.12-fpm
 FROM php:$PHP_VERSION
 
 RUN echo "Using PHP version $PHP_VERSION"
