@@ -80,6 +80,7 @@ CADDY_CONFIG_EXTRA_TOOLS=tls internal
 ## 📝 Notes
 
 -   You can build your own image instead by uncommenting the `build:` section in `docker-compose.yml`.
+-   Rebuild and recreate the `app` container to apply updated system packages: `docker compose build app` then `docker compose up -d --force-recreate app`.
 
 ---
 

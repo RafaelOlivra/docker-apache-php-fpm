@@ -5,7 +5,7 @@ FROM php:$PHP_VERSION
 RUN echo "Using PHP version $PHP_VERSION"
 RUN echo "Setting up container for $HOSTNAME"
 
-RUN apt update && apt install -y --no-install-recommends nano apache2
+RUN apt update && apt install -y --no-install-recommends nano apache2 libbrotli1
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions
