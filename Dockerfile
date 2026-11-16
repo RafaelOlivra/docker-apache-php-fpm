@@ -5,7 +5,21 @@ FROM php:$PHP_VERSION
 RUN echo "Using PHP version $PHP_VERSION"
 RUN echo "Setting up container for $HOSTNAME"
 
-RUN apt update && apt install -y --no-install-recommends nano apache2 libbrotli1
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends nano apache2 libbrotli1; \
+    . /etc/os-release; \
+    case "$VERSION_CODENAME" in \
+        bookworm) fixed_apache_version='2.4.71-1~deb12u1' ;; \
+        trixie) fixed_apache_version='2.4.71-1~deb13u1' ;; \
+        *) echo >&2 "Unsupported Debian release for the Apache security check: $VERSION_CODENAME"; exit 1 ;; \
+    esac; \
+    apache_version="$(dpkg-query -W -f='${Version}' apache2)"; \
+    if ! dpkg --compare-versions "$apache_version" ge "$fixed_apache_version"; then \
+        echo >&2 "Apache $apache_version is below the CVE-2026-119618 fixed version $fixed_apache_version"; \
+        exit 1; \
+    fi; \
+    rm -rf /var/lib/apt/lists/*
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions
@@ -20,7 +34,7 @@ RUN a2dismod mpm_prefork && \
 COPY ./assets/apache-vhost-config.conf /etc/apache2/sites-available/000-default.conf
 
 COPY ./assets/apache-entrypoint.sh /usr/bin/apache-entrypoint.sh
-RUN chmod +x /usr/bin/apache-entrypoint.sh && rm -rf /var/lib/apt/lists/*
+RUN chmod +x /usr/bin/apache-entrypoint.sh
 
 LABEL name="apache-php$PHP_VERSION"
 LABEL email="dev@rafaeloliveira.design"
