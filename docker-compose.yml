@@ -39,11 +39,11 @@ services:
     app:
         # Uncomment the following lines to build the image from a Dockerfile
         # instead of pulling from a registry.
-        build:
-            context: .
-            args:
-                HOSTNAME: ${HOSTNAME}
-                PHP_VERSION: ${PHP_VERSION:-8.5.13-fpm}
+        # build:
+        #     context: .
+        #     args:
+        #         HOSTNAME: ${HOSTNAME}
+        #         PHP_VERSION: ${PHP_VERSION:-8.5.13-fpm}
         image: "rafaeloliveirax/apache-php8.5-fpm:latest"
         container_name: app
         restart: unless-stopped
