@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
-set -Eeuo pipefail
 
 # Replace $HOSTNAME in /etc/apache2/apache2.conf
 sed -i "s/\$HOSTNAME/$HOSTNAME/g" /etc/apache2/apache2.conf
+
+pkill php-fpm &
 
 chown -R www-data:www-data /var/www/html
 php-fpm &
